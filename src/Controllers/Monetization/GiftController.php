@@ -100,6 +100,14 @@ class GiftController
 
     public function topUpWallet(Request $request): Response
     {
+        if (($_ENV['APP_ENV'] ?? 'production') === 'local') {
+            $data = $request->validate([
+                'coins' => 'required|numeric'
+            ]);
+            $userId = $request->user()->id;
+            $this->wallet->creditWallet($userId, (int) $data['coins'], 'top_up', 'Simulação de recarga local');
+            return Response::ok($this->wallet->getBalance($userId), 'Carteira recarregada.');
+        }
         // Delegated to PaymentController::createPaymentIntent
         return Response::error('Use /api/v1/payments/stripe/intent to top up.', 303);
     }
