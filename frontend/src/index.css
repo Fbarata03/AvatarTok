@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:            #080810;
+  --surface:       #0f0f1a;
+  --surface2:      #161625;
+  --surface3:      #1e1e32;
+  --border:        rgba(255,255,255,0.08);
+  --border-light:  rgba(255,255,255,0.04);
+  --primary:       #7c3aed;
+  --primary-h:     #6d28d9;
+  --primary-glow:  rgba(124,58,237,0.35);
+  --accent:        #ec4899;
+  --accent-glow:   rgba(236,72,153,0.3);
+  --grad:          linear-gradient(135deg, #7c3aed, #ec4899);
+  --grad-subtle:   linear-gradient(135deg, rgba(124,58,237,0.15), rgba(236,72,153,0.08));
+  --text:          #f0eff8;
+  --text-2:        #b8b6cc;
+  --muted:         #6e6c85;
+  --success:       #10b981;
+  --danger:        #ef4444;
+  --warning:       #f59e0b;
+  --live:          #ef4444;
+  --radius-sm:     8px;
+  --radius:        14px;
+  --radius-lg:     20px;
+  --radius-xl:     28px;
+  --shadow-sm:     0 1px 3px rgba(0,0,0,0.4);
+  --shadow:        0 4px 24px rgba(0,0,0,0.5);
+  --shadow-glow:   0 0 40px var(--primary-glow);
+}
+
+html, body, #root {
+  height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 15px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  font-family: inherit;
+  font-size: inherit;
+  transition: all .18s ease;
+}
+button:active { transform: scale(0.97); }
+
+input, textarea, select {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+a { color: inherit; text-decoration: none; }
+img { display: block; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--surface3); border-radius: 4px; }
+
+/* Pulse animation for LIVE badge */
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.3); }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}

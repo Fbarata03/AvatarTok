@@ -1,0 +1,44 @@
+{
+    "name": "avatartok/api",
+    "description": "AvatarTok — Short Video Social Network API with avatar-based interactions",
+    "type": "project",
+    "require": {
+        "php": "^8.2",
+        "ext-pdo": "*",
+        "ext-json": "*",
+        "ext-redis": "*",
+        "firebase/php-jwt": "^6.10",
+        "vlucas/phpdotenv": "^5.6",
+        "league/flysystem": "^3.28",
+        "league/flysystem-aws-s3-v3": "^3.28",
+        "stripe/stripe-php": "^15.9",
+        "predis/predis": "^2.3",
+        "guzzlehttp/guzzle": "^7.9",
+        "monolog/monolog": "^3.7",
+        "ramsey/uuid": "^4.7",
+        "intervention/image": "^3.10",
+        "aws/aws-sdk-php": "^3.336"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^11.0",
+        "fakerphp/faker": "^1.23"
+    },
+    "autoload": {
+        "psr-4": {
+            "AvatarTok\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "AvatarTok\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "migrate": "php database/migrate.php",
+        "seed": "php database/seed.php"
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "sort-packages": true
+    }
+}

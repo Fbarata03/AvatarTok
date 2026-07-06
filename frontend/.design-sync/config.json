@@ -1,0 +1,9 @@
+{
+  "projectId": "2c0307f3-ee65-484a-b609-576c6a9bac14",
+  "pkg": "frontend",
+  "globalName": "AvatarTok",
+  "shape": "package",
+  "buildCmd": "npm run build",
+  "srcDir": "src",
+  "cssEntry": "src/index.css"
+}
