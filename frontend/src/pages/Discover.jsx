@@ -38,13 +38,13 @@ export default function Discover() {
       {/* Search */}
       <div style={{
         display: 'flex', alignItems: 'center', gap: 10,
-        background: focused ? 'var(--surface2)' : 'var(--surface)',
-        border: `1.5px solid ${focused ? 'var(--primary)' : 'var(--border)'}`,
-        borderRadius: 12, padding: '0 16px', marginBottom: 28,
-        transition: 'all .18s',
-        boxShadow: focused ? '0 0 0 3px var(--primary-glow)' : 'none',
+        background: focused ? 'rgba(255, 255, 255, 0.05)' : 'rgba(255, 255, 255, 0.03)',
+        border: `1.5px solid ${focused ? 'rgba(124, 58, 237, 0.4)' : 'rgba(255, 255, 255, 0.08)'}`,
+        borderRadius: 14, padding: '0 18px', marginBottom: 28,
+        transition: 'all 0.25s cubic-bezier(0.4, 0, 0.2, 1)',
+        boxShadow: focused ? '0 0 20px rgba(124, 58, 237, 0.15)' : 'none',
       }}>
-        <Search size={16} color="var(--muted)" />
+        <Search size={16} color="var(--text-2)" />
         <input
           value={search} onChange={e => setSearch(e.target.value)}
           onFocus={() => setFocused(true)} onBlur={() => setFocused(false)}
@@ -76,12 +76,10 @@ export default function Discover() {
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: 12 }}>
           {CREATORS.map(c => (
             <div key={c.handle} style={{
-              background: 'var(--surface)', border: '1px solid var(--border)',
+              background: 'rgba(255, 255, 255, 0.02)', border: '1px solid rgba(255, 255, 255, 0.06)',
               borderRadius: 'var(--radius-lg)', padding: '18px 12px', textAlign: 'center',
-              transition: 'border-color .15s', cursor: 'pointer',
-            }}
-              onMouseEnter={e => e.currentTarget.style.borderColor = 'rgba(124,58,237,0.4)'}
-              onMouseLeave={e => e.currentTarget.style.borderColor = 'var(--border)'}
+              cursor: 'pointer',
+            }} className="glass-interactive"
             >
               <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 10 }}>
                 <div style={{ position: 'relative' }}>
@@ -111,11 +109,9 @@ export default function Discover() {
             <div key={s.title} style={{
               display: 'flex', alignItems: 'center', gap: 14,
               padding: '14px 16px', borderRadius: 'var(--radius)',
-              background: 'var(--surface)', border: '1px solid var(--border)',
-              transition: 'border-color .15s', cursor: 'pointer', marginBottom: 4,
-            }}
-              onMouseEnter={e => e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)'}
-              onMouseLeave={e => e.currentTarget.style.borderColor = 'var(--border)'}
+              background: 'rgba(255, 255, 255, 0.02)', border: '1px solid rgba(255, 255, 255, 0.06)',
+              cursor: 'pointer', marginBottom: 6,
+            }} className="glass-interactive"
             >
               <div style={{
                 width: 46, height: 46, borderRadius: 12, flexShrink: 0,

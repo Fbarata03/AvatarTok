@@ -84,3 +84,43 @@ img { display: block; }
   from { opacity: 0; transform: translateY(8px); }
   to   { opacity: 1; transform: translateY(0); }
 }
+
+.glass-card {
+  background: rgba(15, 15, 26, 0.45);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-interactive {
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.glass-interactive:hover {
+  background: rgba(255, 255, 255, 0.03) !important;
+  border-color: rgba(124, 58, 237, 0.3) !important;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4), 0 0 20px rgba(124, 58, 237, 0.1) !important;
+  transform: translateY(-2px);
+}
+
+.neon-text-primary {
+  text-shadow: 0 0 15px rgba(124, 58, 237, 0.6);
+}
+.neon-text-accent {
+  text-shadow: 0 0 15px rgba(236, 72, 153, 0.6);
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.45s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+

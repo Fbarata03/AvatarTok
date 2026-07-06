@@ -58,12 +58,14 @@ function StreamCard({ stream }) {
       borderRadius: 'var(--radius-lg)', overflow: 'hidden', cursor: 'pointer',
       position: 'relative', aspectRatio: '9/14',
       background: stream.grad,
-      transform: hovered ? 'translateY(-3px)' : 'none',
-      boxShadow: hovered ? '0 12px 40px rgba(0,0,0,0.5)' : '0 4px 16px rgba(0,0,0,0.3)',
-      transition: 'all .2s',
+      transform: hovered ? 'translateY(-4px)' : 'none',
+      boxShadow: hovered ? '0 12px 40px rgba(0,0,0,0.6), 0 0 20px rgba(124,58,237,0.2)' : '0 4px 16px rgba(0,0,0,0.3)',
+      transition: 'all 0.25s cubic-bezier(0.4, 0, 0.2, 1)',
+      border: `1px solid ${hovered ? 'rgba(124,58,237,0.35)' : 'rgba(255,255,255,0.08)'}`,
     }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
+      className="animate-fade-in-up"
     >
       {/* Glow radial */}
       <div style={{

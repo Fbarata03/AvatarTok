@@ -39,9 +39,10 @@ export default function Layout() {
     <div style={{ display: 'flex', height: '100vh', overflow: 'hidden' }}>
       {/* ── Sidebar ─────────────────────────────── */}
       <nav style={{
-        width: 168, flexShrink: 0,
-        background: 'var(--surface)',
-        borderRight: '1px solid var(--border)',
+        width: 180, flexShrink: 0,
+        background: 'rgba(15, 15, 26, 0.75)',
+        backdropFilter: 'blur(20px)',
+        borderRight: '1px solid rgba(255, 255, 255, 0.08)',
         display: 'flex', flexDirection: 'column',
       }}>
         {/* Logo */}
@@ -114,10 +115,22 @@ export default function Layout() {
           </span>
           <div style={{
             display: 'flex', alignItems: 'center', gap: 8,
-            background: 'var(--surface)', border: '1px solid var(--border)',
+            background: 'rgba(255, 255, 255, 0.03)', border: '1px solid rgba(255, 255, 255, 0.08)',
             borderRadius: 24, padding: '0 14px', width: 280,
-          }}>
-            <Search size={14} color="var(--muted)" />
+            transition: 'all 0.25s ease',
+          }}
+            onFocusCapture={e => {
+              e.currentTarget.style.borderColor = 'rgba(124, 58, 237, 0.4)';
+              e.currentTarget.style.boxShadow = '0 0 15px rgba(124, 58, 237, 0.15)';
+              e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)';
+            }}
+            onBlurCapture={e => {
+              e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.08)';
+              e.currentTarget.style.boxShadow = 'none';
+              e.currentTarget.style.background = 'rgba(255, 255, 255, 0.03)';
+            }}
+          >
+            <Search size={14} color="var(--text-2)" />
             <input
               placeholder="Buscar criadores, sons, hashtags..."
               style={{ flex: 1, background: 'none', border: 'none', color: 'var(--text)', fontSize: 13, padding: '9px 0', outline: 'none' }}
@@ -147,15 +160,27 @@ function SectionLabel({ children }) {
 function NavItem({ to, icon: Icon, label, end, live, badge }) {
   return (
     <NavLink to={to} end={end} style={({ isActive }) => ({
-      display: 'flex', alignItems: 'center', gap: 9,
-      padding: '8px 10px', borderRadius: 8,
-      fontSize: 13, fontWeight: isActive ? 600 : 400,
-      color: isActive ? 'var(--text)' : 'var(--muted)',
-      background: isActive ? 'rgba(124,58,237,0.12)' : 'transparent',
-      transition: 'all .12s',
+      display: 'flex', alignItems: 'center', gap: 10,
+      padding: '10px 12px', borderRadius: 10,
+      fontSize: 13, fontWeight: isActive ? 600 : 500,
+      color: isActive ? '#fff' : 'var(--text-2)',
+      background: isActive ? 'linear-gradient(135deg, rgba(124, 58, 237, 0.25), rgba(236, 72, 153, 0.15))' : 'transparent',
+      border: `1px solid ${isActive ? 'rgba(124, 58, 237, 0.2)' : 'transparent'}`,
+      boxShadow: isActive ? '0 4px 15px rgba(124, 58, 237, 0.15)' : 'none',
+      transition: 'all 0.2s ease',
     })}
-      onMouseEnter={e => { if (!e.currentTarget.dataset.active) e.currentTarget.style.background = 'rgba(255,255,255,0.04)' }}
-      onMouseLeave={e => { if (!e.currentTarget.dataset.active) e.currentTarget.style.background = '' }}
+      onMouseEnter={e => {
+        if (!e.currentTarget.className.includes('active')) {
+          e.currentTarget.style.background = 'rgba(255,255,255,0.04)'
+          e.currentTarget.style.transform = 'translateX(2px)'
+        }
+      }}
+      onMouseLeave={e => {
+        if (!e.currentTarget.className.includes('active')) {
+          e.currentTarget.style.background = 'transparent'
+          e.currentTarget.style.transform = 'none'
+        }
+      }}
     >
       {({ isActive }) => (
         <>
@@ -183,12 +208,22 @@ function HIcon({ children }) {
   return (
     <button style={{
       width: 36, height: 36, borderRadius: 10,
-      background: 'var(--surface)', border: '1px solid var(--border)',
+      background: 'rgba(255, 255, 255, 0.03)', border: '1px solid rgba(255, 255, 255, 0.08)',
       display: 'flex', alignItems: 'center', justifyContent: 'center',
-      color: 'var(--muted)', transition: 'all .12s', flexShrink: 0,
+      color: 'var(--text-2)', transition: 'all 0.2s ease', flexShrink: 0,
     }}
-      onMouseEnter={e => { e.currentTarget.style.color = 'var(--text)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)' }}
-      onMouseLeave={e => { e.currentTarget.style.color = 'var(--muted)'; e.currentTarget.style.borderColor = 'var(--border)' }}
+      onMouseEnter={e => {
+        e.currentTarget.style.color = '#fff';
+        e.currentTarget.style.borderColor = 'rgba(124, 58, 237, 0.3)';
+        e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)';
+        e.currentTarget.style.transform = 'scale(1.05)';
+      }}
+      onMouseLeave={e => {
+        e.currentTarget.style.color = 'var(--text-2)';
+        e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.08)';
+        e.currentTarget.style.background = 'rgba(255, 255, 255, 0.03)';
+        e.currentTarget.style.transform = 'none';
+      }}
     >
       {children}
     </button>

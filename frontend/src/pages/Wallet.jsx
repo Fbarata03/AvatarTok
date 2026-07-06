@@ -20,20 +20,31 @@ export default function Wallet() {
     <div style={{ maxWidth: 760, margin: '0 auto', padding: '24px 24px 48px' }}>
       {/* Balance card */}
       <div style={{
-        background: 'linear-gradient(135deg, #7c3aed 0%, #a855f7 50%, #ec4899 100%)',
-        borderRadius: 'var(--radius-xl)', padding: '28px 28px', marginBottom: 16,
-        boxShadow: '0 8px 40px rgba(124,58,237,0.35)',
-      }}>
-        <div style={{ color: 'rgba(255,255,255,0.75)', fontSize: 13, fontWeight: 500, marginBottom: 8 }}>
+        background: 'linear-gradient(135deg, #7c3aed 0%, #a855f7 40%, #ec4899 100%)',
+        borderRadius: 'var(--radius-xl)', padding: '32px', marginBottom: 20,
+        boxShadow: '0 12px 40px rgba(124,58,237,0.4), inset 0 1px 1px rgba(255,255,255,0.2)',
+        position: 'relative', overflow: 'hidden',
+      }} className="animate-fade-in-up">
+        {/* Abstract card decorations */}
+        <div style={{
+          position: 'absolute', top: '-20%', right: '-10%', width: 180, height: 180,
+          borderRadius: '50%', background: 'rgba(255,255,255,0.08)', filter: 'blur(30px)',
+        }} />
+        <div style={{
+          position: 'absolute', bottom: '-40%', left: '-5%', width: 140, height: 140,
+          borderRadius: '50%', background: 'rgba(236,72,153,0.15)', filter: 'blur(20px)',
+        }} />
+
+        <div style={{ color: 'rgba(255,255,255,0.8)', fontSize: 13, fontWeight: 600, marginBottom: 8, textTransform: 'uppercase', letterSpacing: '0.5px', position: 'relative', zIndex: 1 }}>
           Saldo disponível
         </div>
-        <div style={{ display: 'flex', alignItems: 'flex-end', gap: 12, marginBottom: 8 }}>
-          <div style={{ fontSize: 42, fontWeight: 900, color: '#fff', letterSpacing: '-1px', lineHeight: 1 }}>
+        <div style={{ display: 'flex', alignItems: 'flex-end', gap: 12, marginBottom: 8, position: 'relative', zIndex: 1 }}>
+          <div style={{ fontSize: 44, fontWeight: 900, color: '#fff', letterSpacing: '-1px', lineHeight: 1 }}>
             🪙 28,450
           </div>
         </div>
-        <div style={{ color: 'rgba(255,255,255,0.7)', fontSize: 14, marginBottom: 4 }}>≈ $200.35 USD</div>
-        <div style={{ color: 'rgba(255,255,255,0.55)', fontSize: 12 }}>Saldo pendente: 1,200 (em processamento)</div>
+        <div style={{ color: 'rgba(255,255,255,0.85)', fontSize: 15, fontWeight: 600, marginBottom: 12, position: 'relative', zIndex: 1 }}>≈ $200.35 USD</div>
+        <div style={{ color: 'rgba(255,255,255,0.6)', fontSize: 12, position: 'relative', zIndex: 1 }}>Saldo pendente: 1,200 (em processamento)</div>
       </div>
 
       {/* Action buttons */}
@@ -77,11 +88,8 @@ export default function Wallet() {
           <div key={t.id} style={{
             display: 'flex', alignItems: 'center', gap: 14,
             padding: '14px 16px', borderRadius: 'var(--radius)',
-            background: 'var(--surface)', border: '1px solid var(--border)',
-            transition: 'border-color .15s',
-          }}
-            onMouseEnter={e => e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)'}
-            onMouseLeave={e => e.currentTarget.style.borderColor = 'var(--border)'}
+            background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.06)',
+          }} className="glass-interactive"
           >
             <div style={{
               width: 40, height: 40, borderRadius: 12, flexShrink: 0,
@@ -109,13 +117,11 @@ export default function Wallet() {
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(6, 1fr)', gap: 10, marginBottom: 16 }}>
         {GIFTS.map(g => (
           <button key={g.name} style={{
-            padding: '16px 8px', borderRadius: 'var(--radius)',
-            background: 'var(--surface)', border: '1px solid var(--border)',
+            padding: '18px 10px', borderRadius: 'var(--radius)',
+            background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.06)',
             display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6,
-            cursor: 'pointer', transition: 'all .15s',
-          }}
-            onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(124,58,237,0.4)'; e.currentTarget.style.transform = 'translateY(-2px)' }}
-            onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.transform = 'none' }}
+            cursor: 'pointer',
+          }} className="glass-interactive"
           >
             <span style={{ fontSize: 26 }}>{g.emoji}</span>
             <span style={{ fontWeight: 700, fontSize: 12 }}>{g.name}</span>

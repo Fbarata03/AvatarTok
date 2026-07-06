@@ -168,13 +168,15 @@ function VideoCard({ video }) {
   }
 
   return (
-    <article style={{ marginTop: 20 }}>
+    <article style={{ marginTop: 20 }} className="animate-fade-in-up">
       {/* Video area */}
       <div style={{
         borderRadius: 'var(--radius-lg)', overflow: 'hidden',
         background: video.grad || 'linear-gradient(160deg,#1a0535,#0d1a40)',
         position: 'relative', aspectRatio: '9/16', maxHeight: 540,
         cursor: 'pointer',
+        boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4), 0 0 40px var(--primary-glow)',
+        border: '1px solid rgba(255, 255, 255, 0.08)',
       }}>
         {/* Avatar animation */}
         <div style={{
@@ -199,19 +201,21 @@ function VideoCard({ video }) {
           position: 'absolute', right: 10, bottom: 80,
           display: 'flex', flexDirection: 'column', gap: 16, alignItems: 'center',
         }}>
-          <ActionBtn icon={<Heart size={22} fill={liked ? '#ef4899' : 'none'} color={liked ? '#ec4899' : '#fff'} />}
-            label={fmt(likes)} onClick={toggleLike} active={liked} />
+          <ActionBtn icon={<Heart size={22} fill={liked ? '#ec4899' : 'none'} color={liked ? '#ec4899' : '#fff'} />}
+            label={fmt(likes)} onClick={toggleLike} active={liked} activeColor="rgba(236, 72, 153, 0.4)" />
           <ActionBtn icon={<MessageCircle size={22} color="#fff" />} label={fmt(video.comments || 0)} />
           <ActionBtn icon={<Gift size={22} color="#fff" />} label={fmt(video.shares || 0)} />
           <ActionBtn icon={<Bookmark size={22} fill={saved ? '#a78bfa' : 'none'} color={saved ? '#a78bfa' : '#fff'} />}
-            label="Salvar" onClick={() => setSaved(s => !s)} />
+            label="Salvar" onClick={() => setSaved(s => !s)} active={saved} activeColor="rgba(167, 139, 250, 0.4)" />
         </div>
 
         {/* Bottom info */}
         <div style={{
-          position: 'absolute', bottom: 0, left: 0, right: 50,
-          padding: '60px 14px 14px',
-          background: 'linear-gradient(transparent, rgba(0,0,0,0.75))',
+          position: 'absolute', left: 12, bottom: 12, right: 68,
+          background: 'rgba(15, 15, 26, 0.65)', backdropFilter: 'blur(16px)',
+          border: '1px solid rgba(255, 255, 255, 0.08)',
+          borderRadius: 16, padding: '14px',
+          boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)',
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}>
             <Avatar name={video.username || 'U'} size={32} ring />
@@ -248,19 +252,27 @@ function VideoCard({ video }) {
   )
 }
 
-function ActionBtn({ icon, label, onClick, active }) {
+function ActionBtn({ icon, label, onClick, active, activeColor }) {
   return (
     <button onClick={onClick} style={{
-      background: 'rgba(0,0,0,0.35)', backdropFilter: 'blur(8px)',
-      border: 'none', borderRadius: 12, padding: '8px',
-      display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 3,
-      cursor: 'pointer', transition: 'transform .15s',
+      background: 'rgba(15, 15, 26, 0.5)', backdropFilter: 'blur(12px)',
+      border: `1px solid ${active ? (activeColor || 'var(--accent)') : 'rgba(255, 255, 255, 0.08)'}`,
+      borderRadius: 14, padding: '10px',
+      display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4,
+      cursor: 'pointer', transition: 'all 0.25s cubic-bezier(0.4, 0, 0.2, 1)',
+      boxShadow: active ? `0 0 15px ${activeColor || 'rgba(236, 72, 153, 0.25)'}` : 'none',
     }}
-      onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.08)'}
-      onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
+      onMouseEnter={e => {
+        e.currentTarget.style.transform = 'scale(1.1) translateY(-2px)'
+        if (!active) e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.25)'
+      }}
+      onMouseLeave={e => {
+        e.currentTarget.style.transform = 'none'
+        if (!active) e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.08)'
+      }}
     >
       {icon}
-      {label && <span style={{ color: '#fff', fontSize: 11, fontWeight: 600 }}>{label}</span>}
+      {label && <span style={{ color: '#fff', fontSize: 11, fontWeight: 700 }}>{label}</span>}
     </button>
   )
 }
